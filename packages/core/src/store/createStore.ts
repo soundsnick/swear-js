@@ -23,8 +23,12 @@ export const createStore = (storeArgs: CreateStoreArgs = {}): StoreReturnType =>
     setSwearValue: <T>(swearId: SwearId, payload: T) => {
       const prev = store[swearId];
       store[swearId] = payload;
-      subscribers[swearId] ? subscribers[swearId](payload) : void 0;
-      storeArgs?.onPatch ? storeArgs.onPatch({ prev: prev, payload, next: store[swearId] }) : void 0;
+      if (subscribers[swearId]) {
+        subscribers[swearId](payload);
+      }
+      if (storeArgs?.onPatch) {
+        storeArgs.onPatch({ prev, payload, next: store[swearId] });
+      }
     },
   };
 };
