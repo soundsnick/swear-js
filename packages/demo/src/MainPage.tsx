@@ -1,7 +1,8 @@
 import React, {FC, useCallback} from "react";
-import { useSwear} from "@swear-js/react";
+import {useSwear} from "@swear-js/react";
 
 import {countSwear} from "./countSwear";
+
 export const MainPage: FC = () => {
     console.log(useSwear(countSwear))
     const [count, { set: setCount }] = useSwear<number>(countSwear);
