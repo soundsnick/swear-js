@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStore } from '@swear-js/core';
-import { ReducerType, SwearType } from '../types';
+import { SwearReducerType, SwearType } from './types';
 
 export const swearContext = React.createContext(createStore());
 
-export const useSwear = <T>([swearId, defaultState, actions]: SwearType<T>): [T, Record<string, ReducerType>] => {
+export const useSwear = <T>([swearId, defaultState, actions]: SwearType<T>): [T, Record<string, SwearReducerType>] => {
   const store = React.useContext(swearContext);
 
   const [swearValue, setSwearValue] = React.useState<T>(defaultState);
@@ -23,7 +23,7 @@ export const useSwear = <T>([swearId, defaultState, actions]: SwearType<T>): [T,
 
   const actionsWrapped = Object.entries(actions).reduce((acc, [actionType, reducer]) => ({
     ...acc,
-    [actionType]: reducer((payload) => (store?.setSwearValue<T>(swearId, <T>payload))),
+    [actionType]: reducer((payload) => (store?.setSwearValue<T>(swearId, actionType, <T>payload))),
   }), {});
 
   return [swearValue, actionsWrapped];

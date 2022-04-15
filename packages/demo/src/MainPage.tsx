@@ -1,30 +1,53 @@
-import React, { FC, useCallback } from 'react';
+import React, {
+  FC, useCallback, useEffect, useMemo,
+} from 'react';
 import { useSwear } from '@swear-js/react';
 
 import { countSwear } from './countSwear';
+import { countProSwear } from './countProSwear';
 
 export const MainPage: FC = () => {
-  console.log(useSwear(countSwear));
-  const [count, { set: setCount }] = useSwear<number>(countSwear);
+  const [count, { set: setCount, clear: clearCount }] = useSwear<number>(countSwear);
+  const [countPro, { set: setCountPro, clear: clearCountPro }] = useSwear<number>(countProSwear);
 
-  const decreaseCount = useCallback(() => {
-    setCount(count - 1);
-  }, [count, setCount]);
+  const square = useMemo(() => count * count, [count]);
 
-  const increaseCount = useCallback(() => {
-    setCount(count + 1);
-  }, [count, setCount]);
+  useEffect(() => {
+    console.log('CHECK reactivity', count);
+  }, []);
+
   return (
     <div>
       <div style={{
         textAlign: 'center', marginTop: 150, marginBottom: 10, fontSize: 50,
       }}
       >
-        <span>{count}</span>
+        <span>
+          {count}
+        </span>
+        <p style={{ fontSize: 13 }}>
+          Square:
+          {square}
+        </p>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <button onClick={decreaseCount}>-1</button>
-        <button onClick={increaseCount}>+1</button>
+        <button onClick={() => setCount(count - 1)}>-1</button>
+        <button onClick={() => setCount(count + 1)}>+1</button>
+        <button onClick={clearCount}>Reset</button>
+      </div>
+
+      <div style={{
+        textAlign: 'center', marginTop: 150, marginBottom: 10, fontSize: 50,
+      }}
+      >
+        <span>
+          {countPro}
+        </span>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <button onClick={() => setCountPro(countPro - 1)}>-1</button>
+        <button onClick={() => setCountPro(countPro + 1)}>+1</button>
+        <button onClick={clearCountPro}>Reset</button>
       </div>
     </div>
   );
