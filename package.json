@@ -1,0 +1,14 @@
+{
+  "name": "@swear-js/root",
+  "version": "1.0.0",
+  "repository": "git@gitlab.com:soundsnick/swear-js.git",
+  "author": "soundsnick <soundsnick@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
+    "compile": "lerna run compile"
+  },
+  "dependencies": {
+    "lerna": "^4.0.0"
+  }
+}

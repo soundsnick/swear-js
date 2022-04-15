@@ -1,0 +1,11 @@
+/node_modules
+/.idea
+lerna_backup.json
+yarn.lock
+package-lock.json
+
+/packages/*/**/package-lock.json
+/packages/*/**/yarn.lock
+/packages/*/**/node_modules
+/packages/*/**/lib
+/packages/*/**/dist
