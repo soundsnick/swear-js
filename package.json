@@ -4,6 +4,7 @@
   "repository": "git@gitlab.com:soundsnick/swear-js.git",
   "author": "soundsnick <soundsnick@gmail.com>",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "compile": "lerna run compile"
