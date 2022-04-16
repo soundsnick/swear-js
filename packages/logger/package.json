@@ -1,12 +1,11 @@
 {
   "name": "@swear-js/logger",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "Logger for swear-js",
   "repository": {
     "type": "git",
     "url": "git@github.com:soundsnick/swear-js.git"
   },
-  "private": true,
   "keywords": [
     "state-manager",
     "state manager",
