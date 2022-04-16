@@ -4,7 +4,7 @@
   "description": "React support for swear-js",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:soundsnick/swear-js.git"
+    "url": "git@github.com:soundsnick/swear-js.git"
   },
   "private": true,
   "keywords": [
