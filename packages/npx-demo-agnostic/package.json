@@ -1,6 +1,6 @@
 {
   "name": "swear-demo-agnostic",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "ISC",
   "dependencies": {
     "shelljs": "^0.8.5"
