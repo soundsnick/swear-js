@@ -14,8 +14,5 @@
   },
   "devDependencies": {
     "shelljs": "^0.8.5"
-  },
-  "bin": {
-    "swear-react-demo": "bin/swear-react-demo.js"
   }
 }
