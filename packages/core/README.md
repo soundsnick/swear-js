@@ -13,6 +13,12 @@ Core package of [SwearJS](https://github.com/soundsnick/swear-js) state manager
 - [Framework agnostic (@swear-js/core)](https://npmjs.org/@swear-js/core)
 - [React (@swear-js/react)](https://npmjs.org/@swear-js/react)
 
+### Demo
+Demo application is runnable via npx:
+- [Framework agnostic] `$ npx swear-demo-agnostic`
+> Don't forget to remove created project directory after
+
+
 ## Installation
 ```
 $ npm install @swear-js/core

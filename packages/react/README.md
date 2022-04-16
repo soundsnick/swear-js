@@ -8,6 +8,12 @@ React package of [SwearJS](https://github.com/soundsnick/swear-js) state manager
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@swear-js/react?style=flat-square)](https://bundlephobia.com/result?p=@swear-js/react)
 ![GitHub](https://img.shields.io/github/license/soundsnick/swear-js?style=flat-square)
 
+### Demo
+Demo application is runnable via npx:
+- [React] `$ npx swear-demo-react`
+> Don't forget to remove created project directory after
+
+
 ## Installation
 ```
 $ npm install @swear-js/core @swear-js/react
