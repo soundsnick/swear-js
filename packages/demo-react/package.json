@@ -1,6 +1,6 @@
 {
   "name": "@swear-js/demo-react",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
