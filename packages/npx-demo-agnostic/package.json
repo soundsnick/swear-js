@@ -1,0 +1,11 @@
+{
+  "name": "swear-demo-agnostic",
+  "version": "1.0.2",
+  "license": "ISC",
+  "dependencies": {
+    "shelljs": "^0.8.5"
+  },
+  "bin": {
+    "swear-demo-agnostic": "bin/swear-demo-agnostic.js"
+  }
+}
