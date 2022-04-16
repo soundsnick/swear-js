@@ -1,100 +1,94 @@
-## Swear JS
-[![SwearJs](https://i.imgur.com/WLfyHix.png)](https://gitlab.com/soundsnick/swear-js)
+# 🍭 Swear JS
+## @swear-js/core
+___
+[![npm](https://img.shields.io/npm/v/@swear-js/core?style=flat-square)](https://www.npmjs.com/package/@swear-js/core)
+![npm type definitions](https://img.shields.io/npm/types/@swear-js/core?style=flat-square)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@swear-js/core?style=flat-square)](https://bundlephobia.com/result?p=@swear-js/core)
+![GitHub](https://img.shields.io/github/license/soundsnick/swear-js?style=flat-square)
 
-Simple react state-manager
-
-### Wrap your application with StoreContext
-
-```typescript
-import {createStore, StoreContext} from "swear-js";
+Core package of [SwearJS](https://github.com/soundsnick/swear-js) state manager
 
 
-function App() {
-    const store = createStore();
+### Frameworks:
+- [Framework agnostic (@swear-js/core)](https://npmjs.org/@swear-js/core)
+- [React (@swear-js/react)](https://npmjs.org/@swear-js/react)
 
-    return (
-        <StoreContext.Provider value={store}>
-            ...
-        </StoreContext.Provider>
-    );
-}
+## Installation
+```
+$ npm install @swear-js/core
 ```
 
-### Creating Swear
-
-"Swear" is the name of your state particle.
-1. Default swear that stores numeric value of counter.
-
-```typescript
-import {createSwear} from "swear-js";
-
-// createSwear gets 3 arguments: name, defaultValue, actions
-// Action is closure type function, which gets `mutate` argument, that is used for mutating state
-const countSwear = createSwear('counter', 0, {
-    set: (mutate) => (payload: number) => {
-        mutate(payload);
-    }
-});
+or in case you are using Yarn:
+```
+$ yarn add @swear-js/core
 ```
 
-2. You can also pass function to `mutate` with previous value of your state.
-```typescript
-import {createSwear} from "swear-js";
+## Usage
+___
+First you have to initialize your store.
 
-// createSwear gets 3 arguments: name, defaultValue, actions
-// Action is closure type function, which gets `mutate` argument, that is used for mutating state
-const countSwear = createSwear('counter', 0, {
-    set: (mutate) => (payload: number) => {
-        mutate(prev => prev + payload);
-    }
-});
+```typescript
+import { createStore } from "@swear-js/core";
+
+const store = createStore();
 ```
 
-### Usage
+Then you have to create
+```javascript
+import { createStore } from "@swear-js/core";
 
+const store = createStore();
 
-
-```typescript
-import {createSwear, useSwear} from "swear-js";
-
-const countSwear = createSwear('counter', 0, {
-  set: (mutate) => (payload: number) => {
-    mutate(prev => prev + payload);
-    return "Test string";
+// This will create swear, and triggers onUpdate everytime it changes
+store.subscribe({
+  swearId: 'count',
+  defaultState: 0,
+  onUpdate: (newValue) => {
+      // You can here trigger things when it updates. You can trigger here your render function, or something
   }
 });
 
-// useSwear returns tuple of two elements: first is reactive value of your state, second is an object of your actions.
-const [value, {set}] = useSwear(countSwear);
-const foo = () => {
-    set(10);
-}
-
-foo();
+const decreaseHandler = () => {
+  store.setSwearValue('count', 'decrease', store.getSwearValue('count') - 1);
+};
+const increaseHandler = () => {
+  store.setSwearValue('count', 'increase', store.getSwearValue('count') + 1);
+};
 ```
 
-Operating with return values of actions
+## Logging
+___
+You can pass your custom logger to the store, or use @swear-js/logger.
+Swear-js logger usage:
 
 ```typescript
-import {createSwear, useSwear} from "swear-js";
+import { createStore } from "@swear-js/core";
+import { swearLogger } from "@swear-js/logger";
 
-const countSwear = createSwear('counter', 0, {
-  set: (mutate) => (payload: number) => {
-    mutate(prev => prev + payload);
-    // Here you can return whatever you want
-    return "Test string";
-  }
-});
-
-const [value, {set}] = useSwear(countSwear);
-const foo = () => {
-    // And here get that returned value
-    const response = set(10);
-    console.log(response); // Will log "Test string"
-}
-
-foo();
+const store = createStore({ onPatch: swearLogger });
 ```
 
-## Contributing
-Project repository: https://gitlab.com/soundsnick/swear-js
+In order to implement your own logger solution, you just have to keep in mind an API of `onPatch` argument of the store.
+`onPatch` is any callback that get `SwearPatch`(you can find it in package) type as an argument.
+Simply SwearPatch is:
+```typescript
+{
+  swearId, // String value which gets a name of patched swear state
+  actionType, // String value which gets a name of a dispatched action
+  prev, // Previous store state (object)
+  payload, // Payload passed
+  next // Current store state
+}
+```
+Example very-simple implementation of logger:
+
+```typescript
+import { SwearPatch, createStore } from "@swear-js/core";
+
+const logger = ({ swearId, actionType, prev, payload, next }: SwearPatch) => {
+    console.log(`Swear: ${swearId}, Action: ${actionType}, Payload: ${payload}`);
+    console.log(`Previous state: ${prev}`, `Current state: ${next}`);
+};
+
+const store = createStore({ onPatch: logger });
+```

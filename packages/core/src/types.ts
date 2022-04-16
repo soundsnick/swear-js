@@ -28,6 +28,6 @@ export type SwearStoreReturnType = {
   getState: () => SwearStoreType<any>;
   getSwearValue: <T>(swearId: string) => T;
   setSwearValue: <T>(swearId: string, actionType: string, payload: T) => void;
-  subscribe: <T>(swearId: SwearRegisterSubscribeArgs<T>) => void;
+  subscribe: <T>(swear: SwearRegisterSubscribeArgs<T>) => void;
   unsubscribe: (swearId: SwearId) => void;
 };
