@@ -6,7 +6,6 @@
     "type": "git",
     "url": "git@github.com:soundsnick/swear-js.git"
   },
-  "private": true,
   "keywords": [
     "state-manager",
     "state manager",
