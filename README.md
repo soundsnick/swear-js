@@ -6,5 +6,6 @@ Simple state manager
 - [React (@swear-js/react)](https://npmjs.org/@swear-js/react)
 
 ### Demo
-- [Framework agnostic](https://github.com/soundsnick/swear-js/tree/main/packages/demo-agnostic)
-- [React](https://github.com/soundsnick/swear-js/tree/main/packages/demo-react)
+Demo application are runnable via npx:
+- [Framework agnostic] `$ npx swear-demo-agnostic`
+- [React] `$ npx swear-demo-react`
