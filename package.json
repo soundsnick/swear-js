@@ -7,8 +7,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "compile": "lerna run compile",
-    "publish": "npm run compile && lerna publish"
+    "compile": "lerna run compile"
   },
   "dependencies": {
     "lerna": "^4.0.0"
