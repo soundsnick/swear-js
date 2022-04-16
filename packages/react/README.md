@@ -55,3 +55,22 @@ export const countSwear = createSwear('counter', defaultState, {
   },
 });
 ```
+
+Use your swear via hook
+```javascript
+// YourComponent.jsx
+import React from 'react';
+import { countSwear } from './countSwear';
+
+export const YourComponent = () => {
+  const [count, { set: setCount, clear: clearCount }] = useSwear(countSwear);
+
+  return (
+      <>
+        <span>{count}</span>
+        <Button onClick={() => setCount(count + 1)}>Increase</Button>
+        <Button onClick={clearCount}>Reset</Button>
+      </>
+  );
+}
+```
