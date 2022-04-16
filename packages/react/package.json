@@ -46,5 +46,6 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "standard-version": "^9.3.1"
-  }
+  },
+  "gitHead": "179a2c450b96aa4ec20ae0f4a29af1ba2724968e"
 }
