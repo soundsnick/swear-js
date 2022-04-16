@@ -1,14 +1,14 @@
 {
   "name": "@swear-js/demo-react",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
-    "@swear-js/core": "^1.1.5",
-    "@swear-js/logger": "^1.1.6",
-    "@swear-js/react": "^1.1.5",
+    "@swear-js/core": "^1.1.6",
+    "@swear-js/logger": "^1.1.7",
+    "@swear-js/react": "^1.1.6",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.24",
     "@types/react": "^18.0.5",
@@ -63,12 +63,12 @@
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "eslint": "^8.13.0",
-    "eslint-webpack-plugin": "^3.1.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.4.0"
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "eslint-webpack-plugin": "^3.1.1"
   },
   "scripts": {
     "start": "node scripts/start.js",

@@ -1,6 +1,6 @@
 {
   "name": "@swear-js/core",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Simple observer state manager",
   "repository": {
     "type": "git",
