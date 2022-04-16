@@ -2,6 +2,9 @@
   "name": "swear-demo-react",
   "version": "1.0.2",
   "license": "ISC",
+  "dependencies": {
+    "shelljs": "^0.8.5"
+  },
   "bin": {
     "swear-demo-react": "bin/swear-demo-react.js"
   }
