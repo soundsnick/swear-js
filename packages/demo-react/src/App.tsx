@@ -5,7 +5,7 @@ import { swearLogger } from '@swear-js/logger';
 import { MainPage } from './MainPage';
 
 function App() {
-  const store = createStore({ onPatch: swearLogger });
+  const store = createStore({ onPatch: swearLogger() });
   return (
     <swearContext.Provider value={store}>
       <MainPage />

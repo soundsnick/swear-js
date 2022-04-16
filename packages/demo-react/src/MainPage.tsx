@@ -7,9 +7,8 @@ import { countSwear } from './countSwear';
 import { countProSwear } from './countProSwear';
 
 export const MainPage: FC = () => {
-  const [count, { set: setCount, clear: clearCount }] = useSwear<number>(countSwear);
-  const [countPro, { set: setCountPro, clear: clearCountPro }] = useSwear<number>(countProSwear);
-
+  const [count, { set: setCount, reset: clearCount }] = useSwear<number>(countSwear);
+  const [countPro, { set: setCountPro, reset: clearCountPro }] = useSwear<number>(countProSwear);
   return (
     <div style={{
       maxWidth: 500, margin: 'auto', fontFamily: 'sans-serif', lineHeight: 1.2,

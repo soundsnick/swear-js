@@ -1,7 +1,7 @@
 import { createStore } from "@swear-js/core";
 import { swearLogger } from "@swear-js/logger";
 
-const store = createStore({ onPatch: swearLogger });
+const store = createStore({ onPatch: swearLogger() });
 
 const render = ({ count }) => {
     const counter = document.getElementById('counter');
