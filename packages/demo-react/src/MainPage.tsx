@@ -1,14 +1,16 @@
 import React, {
-  FC, useCallback, useEffect, useMemo,
+  FC,
 } from 'react';
 import { useSwear } from '@swear-js/react';
 
-import { countSwear } from './countSwear';
-import { countProSwear } from './countProSwear';
+import { countSwear } from './swears/countSwear';
+import { countProSwear } from './swears/countProSwear';
+import { postsSwear } from './swears/postsSwear';
 
 export const MainPage: FC = () => {
-  const [count, { set: setCount, reset: clearCount }] = useSwear<number>(countSwear);
-  const [countPro, { set: setCountPro, reset: clearCountPro }] = useSwear<number>(countProSwear);
+  const [count, { set: setCount, reset: clearCount }] = useSwear(countSwear);
+  const [countPro, { set: setCountPro, reset: clearCountPro }] = useSwear(countProSwear);
+  const [posts, { fetchPosts }] = useSwear(postsSwear);
   return (
     <div style={{
       maxWidth: 500, margin: 'auto', fontFamily: 'sans-serif', lineHeight: 1.2,
@@ -61,6 +63,26 @@ export const MainPage: FC = () => {
         </div>
       </div>
 
+      <button onClick={fetchPosts}>Async Fetch posts</button>
+      <div>
+        {posts.map((n) => (
+          <div
+            key={n.id}
+            style={{
+              display: 'flex', gap: 20, alignItems: 'flex-start', border: '1px solid #d7d7d7', padding: 30,
+            }}
+          >
+            <div>
+              <img src={n.avatar} style={{ height: 100, width: 100 }} alt={n.name} />
+            </div>
+            <div>
+              <h2>{n.username}</h2>
+              <span>{n.name}</span>
+              <span>{n.email}</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
