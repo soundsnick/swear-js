@@ -1,15 +1,16 @@
 const shell = require('shelljs');
+const child_process = require('child_process');
 
 const { code } = shell.exec('npm run compile', { async: false });
 if (code !== 0) {
-    console.error("\x1B[31mRelease canceled! Compilation failed");
+    console.error("\x1B[31mRelease canceled! Compilation failed\x1b[0m");
 } else {
-    console.log("\x1B[35m[1] Compilation success! Publishing...");
-    const { publishCode } = shell.exec("lerna publish");
-    if (publishCode !== 0) {
-        console.error("\x1B[31mRelease failed! Lerna publish failed/canceled");
-    } else {
-        console.log("\x1B[35m[1] Publishing success! Pushing chore commit");
+    console.log("\x1B[32m[1] Compilation success! Publishing...\x1b[0m");
+    try {
+        child_process.execFileSync("lerna publish", [], {stdio: 'inherit'});
+        console.log("\x1B[32m[1] Publishing success! Pushing chore commit\x1b[0m");
         shell.exec("git push origin main");
+    } catch (e) {
+        console.error("\x1B[31mRelease failed! Lerna publish failed/canceled\x1b[0m");
     }
 }
