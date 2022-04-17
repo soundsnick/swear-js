@@ -7,9 +7,12 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "publish": "lerna publish && git push origin main"
+    "compile": "lerna run compile"
   },
   "dependencies": {
     "lerna": "^4.0.0"
+  },
+  "devDependencies": {
+    "shelljs": "^0.8.5"
   }
 }
