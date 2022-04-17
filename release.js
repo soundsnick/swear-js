@@ -7,8 +7,8 @@ if (code !== 0) {
 } else {
     console.log("\x1B[32m[1] Compilation success! Publishing...\x1b[0m");
     try {
-        const publish = child_process.spawnSync("lerna publish", [], {stdio: 'inherit'});
-        console.log(publish.error)
+        const publish = child_process.spawnSync("lerna", ["publish"], {stdio: 'inherit'});
+        console.log(publish.status)
         console.log("\x1B[32m[1] Publishing success! Pushing chore commit\x1b[0m");
         shell.exec("git push origin main");
     } catch (e) {
