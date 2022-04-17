@@ -1,8 +1,8 @@
-export type SwearMutateType<T> = T | ((prev: T) => T);
+export type SwearMutateType<T> = ((payload: T) => void) | (() => void);
 
-export type SwearReducerType = (payload?: any | null) => any;
+export type SwearReducerType<T> = ((payload: T) => void) | (() => void);
 
-export type SwearActionType<T> = (mutate: (value: SwearMutateType<T>) => void) => SwearReducerType;
+export type SwearActionType<T> = (mutate: (value: SwearMutateType<T>) => void) => SwearReducerType<T>;
 
 export type SwearType<T> = [
   name: string,
@@ -10,4 +10,4 @@ export type SwearType<T> = [
   actions: Record<string, SwearActionType<T>>
 ];
 
-export type SwearReturnType<T> = [value: T, actions: Record<string, unknown>];
+export type SwearReturnType<T, Y> = [value: T, actions: Record<string, Y>];

@@ -20,7 +20,7 @@ export const PostsPage: FC = () => {
         <Link to="/">Back to main</Link>
       </div>
 
-      <button onClick={fetchPosts}>Async Fetch posts</button>
+      <button onClick={() => fetchPosts([null])}>Async Fetch posts</button>
       <div>
         {posts.map((n) => (
           <div
