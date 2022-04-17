@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import { useSwear } from '@swear-js/react';
 
-import { countSwear } from './swears/countSwear';
-import { countProSwear } from './swears/countProSwear';
-import { postsSwear } from './swears/postsSwear';
+import { Link } from 'react-router-dom';
+import { countSwear } from '../swears/countSwear';
+import { countProSwear } from '../swears/countProSwear';
+import { postsSwear } from '../swears/postsSwear';
 
 export const MainPage: FC = () => {
   const [count, { set: setCount, reset: clearCount }] = useSwear(countSwear);
@@ -29,6 +30,8 @@ export const MainPage: FC = () => {
           {' '}
           <a href="https://github.com/soundsnick/swear-js" style={{ color: '#009688', textDecoration: 'none' }}>Repository</a>
         </p>
+
+        <Link to="/posts">Posts</Link>
       </div>
 
       <div style={{

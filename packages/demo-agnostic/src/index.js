@@ -8,6 +8,7 @@ const render = ({ count }) => {
     counter.innerHTML = String(count);
 };
 
+// IIFE
 (() => {
     store.subscribe({
         swearId: 'count',

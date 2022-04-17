@@ -8,7 +8,7 @@ export const swearContext = React.createContext(createStore());
 export const useSwear = <T>([swearId, defaultState, actions]: SwearType<T>): [T, Record<string, SwearReducerType>] => {
   const store = React.useContext(swearContext);
 
-  const [swearValue, setSwearValue] = React.useState<T>(defaultState);
+  const [swearValue, setSwearValue] = React.useState<T>(store.getSwearValue(swearId) ?? defaultState);
 
   React.useEffect(() => {
     store?.subscribe<T>({

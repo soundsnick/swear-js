@@ -13,7 +13,9 @@ export const createStore = (storeArgs: SwearCreateStoreArgs = {}): SwearStoreRet
   return {
     getState: () => store,
     subscribe: <T>({ swearId, defaultState, onUpdate }: SwearRegisterSubscribeArgs<T>) => {
-      store[swearId] = defaultState;
+      if (!(swearId in store)) {
+        store[swearId] = defaultState;
+      }
       subscribers[swearId] = onUpdate;
     },
     unsubscribe: (swearId: SwearId) => {
