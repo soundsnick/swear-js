@@ -7,7 +7,7 @@
         "ignored-file",
         "*.md"
       ],
-      "message": "chore(release): publish",
+      "message": "chore(release): publish to registry",
       "registry": "https://registry.npmjs.org"
     },
     "bootstrap": {
