@@ -1,6 +1,6 @@
 {
   "name": "@swear-js/demo-agnostic",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@swear-js/core": "^1.1.7",
-    "@swear-js/logger": "^1.1.8"
+    "@swear-js/logger": "^1.1.9"
   },
   "devDependencies": {
     "html-loader": "^3.1.0",
