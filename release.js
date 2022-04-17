@@ -11,7 +11,13 @@ if (code !== 0) {
     if (publish.status !== 0) {
         console.error("\x1B[31mRelease failed! Lerna publish failed/canceled\x1b[0m");
     } else {
-        console.log("\x1B[32m[1] Publishing success! Pushing chore commit\x1b[0m");
-        shell.exec("git push origin main");
+        console.log("\x1B[32m[2] Publishing success! Pushing chore commit\x1b[0m");
+        const push = child_process.spawnSync("git", ["push", "origin", "main"], {stdio: 'inherit'});
+        if (push.status !== 0) {
+            console.error("\x1B[31mPushing chores failed. Try it manually by running `git push origin main`\x1b[0m");
+        } else {
+            console.log("\x1B[32m[3] Pushed successfully\x1b[0m");
+        }
+        console.log("\x1B[32m[FINISH] Congratulations on your new release!\x1b[0m");
     }
 }
