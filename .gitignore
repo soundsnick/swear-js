@@ -4,4 +4,3 @@ lerna_backup.json
 
 /packages/*/**/node_modules
 /packages/*/**/dist
-/packages/*/**/lib
