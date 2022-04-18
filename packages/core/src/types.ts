@@ -4,7 +4,7 @@ export type SwearId = string;
 
 export type SwearPatch = {
   swearId: SwearId;
-  actionType: string;
+  tag: string | null;
   prev: any;
   payload: any;
   next: any;
@@ -27,7 +27,7 @@ export type SwearRegisterSubscribeArgs<T> = {
 export type SwearStoreReturnType = {
   getState: () => SwearStoreType<any>;
   getSwearValue: <T>(swearId: string) => T;
-  setSwearValue: <T>(swearId: string, actionType: string, payload: T) => void;
+  setSwearValue: <T>(swearId: string, tag: SwearPatch['tag'], payload: T) => void;
   subscribe: <T>(swear: SwearRegisterSubscribeArgs<T>) => void;
   unsubscribe: (swearId: SwearId) => void;
 };

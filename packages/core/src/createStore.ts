@@ -4,7 +4,7 @@ import {
   SwearStoreReturnType,
   SwearStoreSubscribers,
   SwearStoreType,
-  SwearId,
+  SwearId, SwearPatch,
 } from './types';
 
 export const createStore = (storeArgs: SwearCreateStoreArgs = {}): SwearStoreReturnType => {
@@ -22,7 +22,7 @@ export const createStore = (storeArgs: SwearCreateStoreArgs = {}): SwearStoreRet
       delete subscribers[swearId];
     },
     getSwearValue: <T>(swearId: SwearId): T => store[swearId],
-    setSwearValue: <T>(swearId: SwearId, actionType: string, payload: T) => {
+    setSwearValue: <T>(swearId: SwearId, tag: SwearPatch['tag'], payload: T) => {
       if (store[swearId] !== payload) {
         const prev = { ...store };
         store[swearId] = payload;
@@ -32,7 +32,7 @@ export const createStore = (storeArgs: SwearCreateStoreArgs = {}): SwearStoreRet
         if (storeArgs?.onPatch) {
           storeArgs.onPatch({
             swearId,
-            actionType,
+            tag,
             prev,
             payload,
             next: store,

@@ -3,65 +3,65 @@ import React, {
 } from 'react';
 import { useSwear } from '@swear-js/react';
 
-import { Link } from 'react-router-dom';
 import { countSwear } from '../swears/countSwear';
 import { countProSwear } from '../swears/countProSwear';
+import { Button } from '../components/Button';
 
 export const MainPage: FC = () => {
-  const [count, { set: setCount, reset: clearCount }] = useSwear(countSwear);
+  const [count, {
+    decrease, increase, reset: clearCount,
+  }] = useSwear(countSwear);
   const [countPro, { set: setCountPro, reset: clearCountPro }] = useSwear(countProSwear);
   return (
     <div style={{
-      maxWidth: 500, margin: 'auto', fontFamily: 'sans-serif', lineHeight: 1.2,
+      display: 'flex', justifyContent: 'space-between', marginTop: 150, marginBottom: 10, gap: 30,
     }}
     >
-      <div style={{ padding: '30px 0', borderBottom: '1px solid #d7d7d7' }}>
-        <h2 style={{ marginBottom: 5, color: '#009688' }}>SwearJS demo application</h2>
-        <span>You can check console for patch info</span>
-        <p style={{ margin: 0, marginTop: 30, marginBottom: 5 }}>
-          NpmJS:
-          {' '}
-          <a href="https://npmjs.org/@swear-js/react" style={{ color: '#009688', textDecoration: 'none' }}>@swear-js/react</a>
-        </p>
-        <p style={{ margin: 0 }}>
-          Github:
-          {' '}
-          <a href="https://github.com/soundsnick/swear-js" style={{ color: '#009688', textDecoration: 'none' }}>Repository</a>
-        </p>
-
-        <Link to="/posts">Posts</Link>
-      </div>
-
       <div style={{
-        display: 'flex', justifyContent: 'space-between', marginTop: 150, marginBottom: 10,
+        textAlign: 'center', fontSize: 50, flex: 1,
       }}
       >
+        <span>
+          {count}
+        </span>
         <div style={{
-          textAlign: 'center', fontSize: 50,
+          textAlign: 'center', display: 'flex', gap: 5, marginTop: 35,
         }}
         >
-          <span>
-            {count}
-          </span>
-          <div style={{ textAlign: 'center' }}>
-            <button onClick={() => setCount(count - 1)}>-1</button>
-            <button onClick={() => setCount(count + 1)}>+1</button>
-            <button onClick={clearCount}>Reset</button>
-          </div>
+          <Button onClick={decrease}>-1</Button>
+          <Button onClick={increase}>+1</Button>
         </div>
+        <Button
+          onClick={clearCount}
+          style={{
+            background: '#f44336', display: 'block', width: '100%', marginTop: 5,
+          }}
+        >
+          Reset
+        </Button>
+      </div>
+      <div style={{
+        textAlign: 'center', fontSize: 50, flex: 1,
+      }}
+      >
+        <span>
+          {countPro}
+        </span>
         <div style={{
-          textAlign: 'center', fontSize: 50,
+          textAlign: 'center', display: 'flex', gap: 5, marginTop: 35,
         }}
         >
-          <span>
-            {countPro}
-          </span>
-          <div style={{ textAlign: 'center' }}>
-            <button onClick={() => setCountPro(countPro - 1)}>-1</button>
-            <button onClick={() => setCountPro(countPro + 1)}>+1</button>
-            <button onClick={clearCountPro}>Reset</button>
-          </div>
+          <Button onClick={() => setCountPro(countPro - 1)}>-1</Button>
+          <Button onClick={() => setCountPro(countPro + 1)}>+1</Button>
         </div>
+        <Button
+          onClick={clearCountPro}
+          style={{
+            background: '#f44336', display: 'block', width: '100%', marginTop: 5,
+          }}
+        >
+          Reset
+        </Button>
       </div>
     </div>
   );

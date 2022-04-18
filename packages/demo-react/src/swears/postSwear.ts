@@ -2,19 +2,19 @@ import { createSwear } from '@swear-js/react';
 import axios from 'axios';
 
 type stateTypes = {
-  data: ReadonlyArray<any>;
+  data: any;
   loading: boolean;
 };
 
 const defaultState: stateTypes = {
-  data: [],
+  data: {},
   loading: false,
 };
 
-export const postsSwear = createSwear('posts', defaultState, (mutate) => ({
-  fetchPosts: () => {
+export const postSwear = createSwear('post', defaultState, (mutate) => ({
+  fetchPost: (id: number) => {
     mutate({ ...defaultState, loading: true });
-    axios.get('https://jsonplaceholder.ir/users')
+    axios.get(`https://jsonplaceholder.ir/users/${id}`)
       .then((res) => res.data)
       .then((data) => {
         mutate({ ...defaultState, data });

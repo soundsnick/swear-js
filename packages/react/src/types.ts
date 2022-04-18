@@ -1,4 +1,4 @@
-export type SwearMutateType<T> = ((payload: T) => void) | (() => void);
+export type SwearMutateType<T> = ((payload: T | ((prev: T) => T), tag?: string) => void) | (() => void);
 
 export type SwearType<T, Y> = [
   name: string,

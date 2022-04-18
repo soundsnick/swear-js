@@ -80,7 +80,7 @@ Simply SwearPatch is:
 ```typescript
 {
   swearId, // String value which gets a name of patched swear state
-  actionType, // String value which gets a name of a dispatched action
+  tag, // String value which gets an optional tag, you want to set
   prev, // Previous store state (object)
   payload, // Payload passed
   next // Current store state
@@ -91,8 +91,8 @@ Example very-simple implementation of logger:
 ```typescript
 import { SwearPatch, createStore } from "@swear-js/core";
 
-const logger = ({ swearId, actionType, prev, payload, next }: SwearPatch) => {
-    console.log(`Swear: ${swearId}, Action: ${actionType}, Payload: ${payload}`);
+const logger = ({ swearId, tag, prev, payload, next }: SwearPatch) => {
+    console.log(`Swear: ${swearId}, Tag: ${tag}, Payload: ${payload}`);
     console.log(`Previous state: ${prev}`, `Current state: ${next}`);
 };
 

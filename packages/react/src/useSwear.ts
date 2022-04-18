@@ -25,6 +25,6 @@ export const useSwear = <T, Y>([swearId, defaultState, actions]: SwearType<T, Y>
     set: (payload: T) => (mutate(payload)),
     reset: () => mutate(defaultState),
   });
-  const mutator = (payload: T) => (store?.setSwearValue(swearId, 'someAction', payload));
+  const mutator: SwearMutateType<T> = (payload, tag?) => store?.setSwearValue(swearId, tag ?? null, payload instanceof Function ? payload(swearValue) : payload);
   return [swearValue, { ...defaultActions(mutator), ...actions(mutator) }];
 };

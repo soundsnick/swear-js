@@ -3,31 +3,23 @@ import React, {
 } from 'react';
 import { useSwear } from '@swear-js/react';
 
-import { Link } from 'react-router-dom';
 import { postsSwear } from '../swears/postsSwear';
+import { Button } from '../components/Button';
 
 export const PostsPage: FC = () => {
-  const [posts, { fetchPosts, reset }] = useSwear(postsSwear);
-  return (
-    <div style={{
-      maxWidth: 500, margin: 'auto', fontFamily: 'sans-serif', lineHeight: 1.2,
-    }}
-    >
-      <div style={{ padding: '30px 0', borderBottom: '1px solid #d7d7d7' }}>
-        <h2 style={{ marginBottom: 5, color: '#009688' }}>SwearJS demo application</h2>
-        <span>You can check console for patch info</span>
-        <br />
-        <Link to="/">Back to main</Link>
+  const [{ data, loading }, { fetchPosts, reset }] = useSwear(postsSwear);
+  return loading ? <span>Loading...</span> : (
+    <>
+      <div style={{ display: 'flex', gap: 5 }}>
+        <Button onClick={fetchPosts}>Async Fetch posts</Button>
+        <Button onClick={reset}>Reset</Button>
       </div>
-
-      <button onClick={fetchPosts}>Async Fetch posts</button>
-      <button onClick={reset}>Reset</button>
-      <div>
-        {posts.map((n) => (
+      <div style={{ padding: '30px 0' }}>
+        {data.map((n: any) => (
           <div
             key={n.id}
             style={{
-              display: 'flex', gap: 20, alignItems: 'flex-start', border: '1px solid #d7d7d7', padding: 30,
+              display: 'flex', gap: 20, alignItems: 'flex-start', border: '1px solid #d7d7d7', padding: 30, marginBottom: 10,
             }}
           >
             <div>
@@ -40,7 +32,10 @@ export const PostsPage: FC = () => {
             </div>
           </div>
         ))}
+        {data.length === 0 ? (
+          <span>Empty</span>
+        ) : null}
       </div>
-    </div>
+    </>
   );
 };
