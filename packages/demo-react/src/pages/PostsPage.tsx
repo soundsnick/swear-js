@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { postsSwear } from '../swears/postsSwear';
 
 export const PostsPage: FC = () => {
-  const [posts, { fetchPosts }] = useSwear(postsSwear);
+  const [posts, { fetchPosts, reset }] = useSwear(postsSwear);
   return (
     <div style={{
       maxWidth: 500, margin: 'auto', fontFamily: 'sans-serif', lineHeight: 1.2,
@@ -20,7 +20,8 @@ export const PostsPage: FC = () => {
         <Link to="/">Back to main</Link>
       </div>
 
-      <button onClick={() => fetchPosts([null])}>Async Fetch posts</button>
+      <button onClick={fetchPosts}>Async Fetch posts</button>
+      <button onClick={reset}>Reset</button>
       <div>
         {posts.map((n) => (
           <div

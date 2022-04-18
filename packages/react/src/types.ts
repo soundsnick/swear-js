@@ -1,13 +1,17 @@
 export type SwearMutateType<T> = ((payload: T) => void) | (() => void);
 
-export type SwearReducerType<T> = ((payload: T) => void) | (() => void);
-
-export type SwearActionType<T> = (mutate: (value: SwearMutateType<T>) => void) => SwearReducerType<T>;
-
-export type SwearType<T> = [
+export type SwearType<T, Y> = [
   name: string,
   defaultValue: T,
-  actions: Record<string, SwearActionType<T>>
+  actions: ((mutate: SwearMutateType<T>) => Y)
 ];
 
-export type SwearReturnType<T, Y> = [value: T, actions: Record<string, Y>];
+export type SwearDefaultActions<T> = {
+  set: (payload: T) => void;
+  reset: () => void;
+};
+
+export type SwearReturnType<T, Y> = [state: T, actions: {
+  set: (payload: T) => void;
+  reset: () => void;
+} & Y];

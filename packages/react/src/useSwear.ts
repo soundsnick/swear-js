@@ -1,11 +1,10 @@
 import React from 'react';
 import { createStore } from '@swear-js/core';
-import { SwearType } from './types';
-import { reset, set } from './default-actions';
+import { SwearMutateType, SwearReturnType, SwearType } from './types';
 
 export const swearContext = React.createContext(createStore());
 
-export const useSwear = <T>([swearId, defaultState, actions]: SwearType<T>) => {
+export const useSwear = <T, Y>([swearId, defaultState, actions]: SwearType<T, Y>): SwearReturnType<T, Y> => {
   const store = React.useContext(swearContext);
 
   const [swearValue, setSwearValue] = React.useState<T>(store.getSwearValue(swearId) ?? defaultState);
@@ -22,14 +21,10 @@ export const useSwear = <T>([swearId, defaultState, actions]: SwearType<T>) => {
     return () => store?.unsubscribe(swearId);
   }, []);
 
-  const actionsWrapped = Object.entries(actions).reduce((acc, [actionType, reducer]) => ({
-    ...acc,
-    [actionType]: reducer((payload) => (store?.setSwearValue(swearId, actionType, payload))),
-  }), {
-    set: set((payload: T) => (store?.setSwearValue<T>(swearId, 'set', <T>payload))),
-    reset: reset(defaultState)(() => (store?.setSwearValue<T>(swearId, 'reset', defaultState))),
-    _tag: 'actions',
+  const defaultActions = (mutate: SwearMutateType<T>) => ({
+    set: (payload: T) => (mutate(payload)),
+    reset: () => mutate(defaultState),
   });
-
-  return [swearValue, actionsWrapped] as const;
+  const mutator = (payload: T) => (store?.setSwearValue(swearId, 'someAction', payload));
+  return [swearValue, { ...defaultActions(mutator), ...actions(mutator) }];
 };

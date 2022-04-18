@@ -1,10 +1,8 @@
 import { SwearId } from '@swear-js/core';
-import { SwearActionType, SwearType } from './types';
+import { SwearMutateType, SwearType } from './types';
 
-export const createSwear = <T>(
+export const createSwear = <T, Y>(
   swearId: SwearId,
   defaultValue: T,
-  actions: Record<
-    string,
-    SwearActionType<T>>,
-): SwearType<T> => [swearId, defaultValue, actions];
+  actions: (mutate: SwearMutateType<T>) => Y,
+): SwearType<T, Y> => [swearId, defaultValue, actions];
