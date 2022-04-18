@@ -9,7 +9,7 @@ import { Button } from '../components/Button';
 
 export const MainPage: FC = () => {
   const [count, {
-    decrease, increase, reset: clearCount,
+    set: setCount, decrease, increase, reset: clearCount,
   }] = useSwear(countSwear);
   const [countPro, { set: setCountPro, reset: clearCountPro }] = useSwear(countProSwear);
   return (
@@ -31,6 +31,14 @@ export const MainPage: FC = () => {
           <Button onClick={decrease}>-1</Button>
           <Button onClick={increase}>+1</Button>
         </div>
+        <Button
+          onClick={() => setCount((prev) => prev + 10)}
+          style={{
+            display: 'block', width: '100%', marginTop: 5, marginBottom: 5,
+          }}
+        >
+          Set +10 via prev
+        </Button>
         <Button
           onClick={clearCount}
           style={{

@@ -7,6 +7,7 @@ import { MainPage } from './pages/MainPage';
 import { PostsPage } from './pages/PostsPage';
 import { PostPage } from './pages/PostPage';
 import { Navigation } from './components/Navigation';
+import { TodoPage } from './pages/TodoPage';
 
 function App() {
   const store = createStore({ onPatch: swearLogger() });
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route path="/posts">
             <PostsPage />
+          </Route>
+          <Route path="/todo">
+            <TodoPage />
           </Route>
           <Route path="/post">
             <PostPage />

@@ -54,8 +54,10 @@ const defaultState = 0;
 
 // mutate is a function that changes your state in store
 export const countSwear = createSwear('counter', defaultState, (mutate) => ({
-  set: (payload: number) => mutate(payload),
-  clear: mutate(defaultState, 'HERE YOUR TAG'), // You can also tag your store updates
+  decrease: () => {
+      // You can also access previous value like this
+      mutate((prev) => prev - 1);
+  }
 }));
 ```
 
@@ -66,14 +68,38 @@ import React from 'react';
 import { countSwear } from './countSwear';
 
 export const YourComponent = () => {
-  const [count, { set: setCount, clear: clearCount }] = useSwear(countSwear);
+  // set and reset actions are here by default
+  const [count, { set, decrease, reset }] = useSwear(countSwear);
 
   return (
       <>
         <span>{count}</span>
-        <Button onClick={() => setCount(count + 1)}>Increase</Button>
-        <Button onClick={clearCount}>Reset</Button>
+        // Prev is a special action which can get callback with previous value
+        <Button onClick={() => set((prev) => prev + 1)}>Increase</Button>
+        <Button onClick={decrease}>Increase</Button>
+        <Button onClick={reset}>Reset</Button>
       </>
   );
+}
+```
+
+Primitive mode
+```javascript
+export const YourComponent = () => {
+    import React from 'react';
+    import { useSwearState } from '@swear-js/react';
+
+    // You can use a primitive swear without creation, with only default `set` and `reset` actions
+    const [count, { set, reset }] = useSwearState('counter', 0);
+
+    return (
+        <>
+          <span>{count}</span>
+          // Prev is a special action which can get callback with previous value
+          <Button onClick={() => set((prev) => prev + 1)}>Increase</Button>
+          <Button onClick={() => set((prev) => prev - 1)}>Decrease</Button>
+          <Button onClick={reset}>Reset</Button>
+        </>
+    );
 }
 ```

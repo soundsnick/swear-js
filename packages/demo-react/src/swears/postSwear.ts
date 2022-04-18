@@ -18,6 +18,12 @@ export const postSwear = createSwear('post', defaultState, (mutate) => ({
       .then((res) => res.data)
       .then((data) => {
         mutate({ ...defaultState, data });
+      })
+      .catch((e) => {
+        if (e.response.status === 404) {
+          alert('Not found');
+        }
+        mutate({ ...defaultState });
       });
   },
 }));

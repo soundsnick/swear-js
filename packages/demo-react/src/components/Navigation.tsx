@@ -24,6 +24,7 @@ export const Navigation: FC = () => (
         <Link to="/">Home</Link>
         <Link to="/post">Get post</Link>
         <Link to="/posts">Posts</Link>
+        <Link to="/todo">Todo</Link>
       </div>
     </div>
   </div>

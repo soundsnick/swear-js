@@ -1,5 +1,5 @@
 import React, {
-  FC, useState,
+  FC, useCallback, useState,
 } from 'react';
 import { useSwear } from '@swear-js/react';
 
@@ -9,11 +9,20 @@ import { Button } from '../components/Button';
 export const PostPage: FC = () => {
   const [id, setId] = useState('');
   const [{ data: post, loading }, { fetchPost, reset }] = useSwear(postSwear);
+
+  const handleFetch = useCallback(() => {
+    if (id && !Number.isNaN(Number(id))) {
+      fetchPost(Number(id));
+    } else {
+      alert('Type in a valid number');
+    }
+  }, [id]);
+
   return loading ? <span>Loading...</span> : (
     <>
       <div style={{ display: 'flex', gap: 5, marginBottom: 10 }}>
         <input type="text" value={id} onChange={(e) => setId(e.currentTarget.value)} placeholder="User id" style={{ padding: '5px 15px' }} />
-        <Button onClick={() => fetchPost(Number(id))}>Async Fetch posts</Button>
+        <Button onClick={handleFetch}>Async Fetch posts</Button>
         <Button onClick={reset}>Reset</Button>
       </div>
       <div>
