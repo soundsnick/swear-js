@@ -1,14 +1,14 @@
 {
   "name": "@swear-js/demo-react",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
-    "@swear-js/core": "^2.0.0",
-    "@swear-js/logger": "^2.0.0",
-    "@swear-js/react": "^2.0.2",
+    "@swear-js/core": "^2.1.0",
+    "@swear-js/logger": "^2.1.0",
+    "@swear-js/react": "^2.1.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.24",
     "@types/react": "^18.0.5",
