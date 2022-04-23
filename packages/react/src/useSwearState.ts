@@ -20,6 +20,6 @@ export const useSwearState = <T>(swearId: SwearId, defaultState: T): SwearStateR
     return () => store?.unsubscribe(swearId);
   }, []);
 
-  const mutator: SwearMutateType<T> = (payload, tag?) => store?.setSwearValue(swearId, tag ?? null, payload instanceof Function ? payload(swearValue) : payload);
+  const mutator: SwearMutateType<T> = (payload, tag?) => store?.setSwearValue(swearId, tag ?? null, payload instanceof Function ? payload(store?.getSwearValue(swearId)) : payload);
   return [swearValue, { ...defaultActions(defaultState, swearValue)(mutator) }];
 };
