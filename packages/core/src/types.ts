@@ -18,16 +18,10 @@ export type SwearSubscriberOnUpdate<T> = (newValue: T) => void;
 
 export type SwearStoreSubscribers = Record<SwearId, SwearSubscriberOnUpdate<any>>;
 
-export type SwearRegisterSubscribeArgs<T> = {
-  swearId: SwearId;
-  defaultState: T;
-  onUpdate: SwearSubscriberOnUpdate<T>;
-};
+export type SwearMutateType<T> = ((payload: T | ((prev: T) => T), tag?: string) => void) | (() => void);
 
-export type SwearStoreReturnType = {
-  getState: () => SwearStoreType<any>;
-  getSwearValue: <T>(swearId: string) => T;
-  setSwearValue: <T>(swearId: string, tag: SwearPatch['tag'], payload: T) => void;
-  subscribe: <T>(swear: SwearRegisterSubscribeArgs<T>) => void;
-  unsubscribe: (swearId: SwearId) => void;
-};
+export type SwearType<T, Y> = [
+  name: string,
+  defaultValue: T,
+  actions: ((mutate: SwearMutateType<T>) => Y)
+];

@@ -1,5 +1,4 @@
-import { SwearId } from '@swear-js/core';
-import { SwearMutateType, SwearType } from './types';
+import { SwearId, SwearMutateType, SwearType } from './types';
 
 export const createSwear = <T, Y>(
   swearId: SwearId,

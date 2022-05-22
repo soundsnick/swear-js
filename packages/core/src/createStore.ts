@@ -1,44 +1,61 @@
 import {
-  SwearCreateStoreArgs,
-  SwearRegisterSubscribeArgs,
-  SwearStoreReturnType,
+  SwearCreateStoreArgs, SwearMutateType,
   SwearStoreSubscribers,
   SwearStoreType,
-  SwearId, SwearPatch,
+  SwearSubscriberOnUpdate,
+  SwearType,
 } from './types';
 
-export const createStore = (storeArgs: SwearCreateStoreArgs = {}): SwearStoreReturnType => {
+export const createStore = (storeArgs: SwearCreateStoreArgs = {}) => {
   const store: SwearStoreType<any> = {};
   const subscribers: SwearStoreSubscribers = {};
+
   return {
-    getState: () => store,
-    subscribe: <T>({ swearId, defaultState, onUpdate }: SwearRegisterSubscribeArgs<T>) => {
+    getStore: () => store,
+    subscribe: <T, Y>(swear: SwearType<T, Y>, onUpdate: SwearSubscriberOnUpdate<T>) => {
+      const [swearId, defaultState] = swear;
       if (!(swearId in store)) {
         store[swearId] = defaultState;
       }
       subscribers[swearId] = onUpdate;
     },
-    unsubscribe: (swearId: SwearId) => {
+    unsubscribe: <T, Y>(swear: SwearType<T, Y>) => {
+      const [swearId] = swear;
       delete subscribers[swearId];
     },
-    getSwearValue: <T>(swearId: SwearId): T => store[swearId],
-    setSwearValue: <T>(swearId: SwearId, tag: SwearPatch['tag'], payload: T) => {
-      if (store[swearId] !== payload) {
-        const prev = { ...store };
-        store[swearId] = payload;
-        if (subscribers[swearId]) {
-          subscribers[swearId](payload);
-        }
-        if (storeArgs?.onPatch) {
-          storeArgs.onPatch({
-            swearId,
-            tag,
-            prev,
-            payload,
-            next: store,
-          });
-        }
-      }
+    getSwearState: <T, Y>(swear: SwearType<T, Y>): T => {
+      const [swearId] = swear;
+      return store[swearId];
+    },
+    getSwearActions: <T, Y>(swear: SwearType<T, Y>) => {
+      const [swearId, defaultState, actions] = swear;
+
+      const mutator: SwearMutateType<T> = (payload, tag) => {
+        const finalPayload = payload instanceof Function ? payload(store[swearId]) : payload;
+        const prev = store[swearId];
+
+        store[swearId] = finalPayload;
+
+        storeArgs.onPatch?.({
+          swearId,
+          tag: tag ?? null,
+          prev,
+          payload: finalPayload,
+          next: store[swearId],
+        });
+
+        subscribers[swearId]?.(store[swearId]);
+      };
+
+      const defaultActions = (mutate: SwearMutateType<T>) => ({
+        set: (payload: T | ((prev: T) => T)) => (mutate(payload instanceof Function ? payload(store[swearId]) : payload)),
+        reset: () => mutate(defaultState),
+      });
+
+      return {
+        ...defaultActions(mutator),
+        ...actions(mutator),
+      };
     },
   };
 };
