@@ -1,4 +1,4 @@
-import { createSwear } from '@swear-js/react';
+import { createSwear } from '@swear-js/core';
 import axios from 'axios';
 
 type stateTypes = {
@@ -13,7 +13,7 @@ const defaultState: stateTypes = {
 
 export const postSwear = createSwear('post', defaultState, (mutate) => ({
   fetchPost: (id: number) => {
-    mutate({ ...defaultState, loading: true });
+    mutate((prev) => ({ ...prev, loading: true }));
     axios.get(`https://jsonplaceholder.ir/users/${id}`)
       .then((res) => res.data)
       .then((data) => {
@@ -21,6 +21,7 @@ export const postSwear = createSwear('post', defaultState, (mutate) => ({
       })
       .catch((e) => {
         if (e.response.status === 404) {
+          // eslint-disable-next-line no-alert
           alert('Not found');
         }
         mutate({ ...defaultState });

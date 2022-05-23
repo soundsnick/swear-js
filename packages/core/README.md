@@ -42,33 +42,33 @@ ___
 First you have to initialize your store.
 
 ```typescript
-import { createStore } from "@swear-js/core";
-
-const store = createStore();
-```
-
-Then you have to create
-```javascript
-import { createStore } from "@swear-js/core";
+import { createStore, createSwear } from "@swear-js/core";
 
 const store = createStore();
 
-// This will create swear, and triggers onUpdate everytime it changes
-store.subscribe({
-  swearId: 'count',
-  defaultState: 0,
-  onUpdate: (newValue) => {
-      // You can here trigger things when it updates. You can trigger here your render function, or something
-  }
+// Create swear
+const countSwear = createSwear('count', 0, (mutate) => ({
+   increase: () => mutate(prev => prev + 1),
+   decrease: () => mutate(prev => prev - 1),
+}));
+
+// Callback is triggered on every swear update
+store.subscribe(countSwear, (newValue) => {
+    // Handle updates of countSwear
+    console.log(newValue);
 });
 
-const decreaseHandler = () => {
-  store.setSwearValue('count', 'decrease', store.getSwearValue('count') - 1);
-};
-const increaseHandler = () => {
-  store.setSwearValue('count', 'increase', store.getSwearValue('count') + 1);
-};
+// This will return object of actions with default actions: set() and reset(), and your own defined actions.
+const actions = store.getSwearActions(countSwear);
+const { set, reset, increase, decrease } = actions; // set() and reset() are default actions
+
+increase(); // When you dispatch an action, swear value is mutated, and subscribtion callback is triggered.
 ```
+
+## Default actions
+`store.getSwearActions()` returns an object of combined default actions and your actions.
+> `set()` action implements the same usage interface as React's useState setter. It means you can pass both a payload, and callback with previous value.
+> Example: `set((prev) => prev + 10);`
 
 ## Logging
 ___

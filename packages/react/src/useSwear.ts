@@ -1,25 +1,21 @@
 import React, { useEffect } from 'react';
-import { SwearMutateType, SwearReturnType, SwearType } from './types';
+import { SwearType } from '@swear-js/core';
 import { swearContext } from './swearContext';
-import { defaultActions } from './defaultActions';
+import { SwearReturnType } from './types';
 
-export const useSwear = <T, Y>([swearId, defaultState, actions]: SwearType<T, Y>): SwearReturnType<T, Y> => {
+export const useSwear = <T, Y>(swear: SwearType<T, Y>): SwearReturnType<T, Y> => {
   const store = React.useContext(swearContext);
+  const [, defaultState] = swear;
 
-  const [swearValue, setSwearValue] = React.useState<T>(store.getSwearValue(swearId) ?? defaultState);
+  const [swearValue, setSwearValue] = React.useState<T>(store?.getSwearState(swear) ?? defaultState);
 
   useEffect(() => {
-    store?.subscribe<T>({
-      swearId,
-      defaultState,
-      onUpdate: (newValue: React.SetStateAction<T>) => {
-        setSwearValue(newValue);
-      },
+    store?.subscribe(swear, (newValue: T) => {
+      setSwearValue(newValue);
     });
 
-    return () => store?.unsubscribe(swearId);
+    return () => store?.unsubscribe<T, Y>(swear);
   }, []);
 
-  const mutator: SwearMutateType<T> = (payload, tag?) => store?.setSwearValue(swearId, tag ?? null, payload instanceof Function ? payload(store?.getSwearValue(swearId)) : payload);
-  return [swearValue, { ...defaultActions(defaultState, swearValue)(mutator), ...actions(mutator) }];
+  return [swearValue, store?.getSwearActions(swear)];
 };

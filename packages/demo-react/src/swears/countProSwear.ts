@@ -1,4 +1,4 @@
-import { createSwear } from '@swear-js/react';
+import { createSwear } from '@swear-js/core';
 
 const defaultState = 0;
 

@@ -1,5 +1,6 @@
 import { createStore } from "@swear-js/core";
 import { swearLogger } from "@swear-js/logger";
+import { countSwear } from "./swear/countSwear";
 
 const store = createStore({ onPatch: swearLogger() });
 
@@ -10,26 +11,17 @@ const render = ({ count }) => {
 
 // IIFE
 (() => {
-    store.subscribe({
-        swearId: 'count',
-        defaultState: 0,
-        onUpdate: (newValue) => {
-            render({ count: newValue });
-        }
+    store.subscribe(countSwear, (newValue) => {
+        render({ count: newValue });
     });
 
-    const decreaseHandler = () => {
-        store.setSwearValue('count', 'decrease', store.getSwearValue('count') - 1);
-    };
-    const increaseHandler = () => {
-        store.setSwearValue('count', 'increase', store.getSwearValue('count') + 1);
-    };
+    const { increase, decrease } = store.getSwearActions(countSwear);
 
     const decreaseButton = document.getElementById('decrease');
     const increaseButton = document.getElementById('increase');
 
-    decreaseButton.addEventListener('click', decreaseHandler);
-    increaseButton.addEventListener('click', increaseHandler);
+    decreaseButton.addEventListener('click', decrease);
+    increaseButton.addEventListener('click', increase);
 
-    render({ count: store.getSwearValue('count') });
+    render({ count: store.getSwearState(countSwear) });
 })()

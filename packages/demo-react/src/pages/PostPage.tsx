@@ -14,6 +14,7 @@ export const PostPage: FC = () => {
     if (id && !Number.isNaN(Number(id))) {
       fetchPost(Number(id));
     } else {
+      // eslint-disable-next-line no-alert
       alert('Type in a valid number');
     }
   }, [id]);

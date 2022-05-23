@@ -1,4 +1,4 @@
-import { createSwear } from '@swear-js/react';
+import { createSwear } from '@swear-js/core';
 import axios from 'axios';
 
 type stateTypes = {
@@ -13,7 +13,7 @@ const defaultState: stateTypes = {
 
 export const postsSwear = createSwear('posts', defaultState, (mutate) => ({
   fetchPosts: () => {
-    mutate({ ...defaultState, loading: true });
+    mutate((prev) => ({ ...prev, loading: true }));
     axios.get('https://jsonplaceholder.ir/users')
       .then((res) => res.data)
       .then((data) => {
