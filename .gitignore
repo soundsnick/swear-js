@@ -5,3 +5,6 @@ lerna_backup.json
 /packages/*/**/node_modules
 /packages/*/**/dist
 /packages/*/**/lib
+/packages/*/**/coverage/
+/*/**/.DS_Store
+.DS_Store
