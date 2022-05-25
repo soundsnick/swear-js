@@ -1,0 +1,17 @@
+* **Getting started**
+  - [Where to start?](/)
+* **Packages**
+  - [**Core**](/packages/core)
+    - [Demo](/packages/core?id=demo)
+    - [Installation](/packages/core?id=installation)
+    - [Usage](/packages/core?id=usage)
+    - [Default actions](/packages/core?id=default-actions)
+    - [Logging](/packages/core?id=logging)
+  - [**React**](/packages/react)
+    - [Demo](/packages/react?id=demo)
+    - [Installation](/packages/react?id=installation)
+    - [Usage](/packages/react?id=usage)
+  - [**Logger**](/packages/logger)
+    - [Installation](/packages/logger?id=installation)
+    - [Usage](/packages/logger?id=usage)
+    - [Tagging](/packages/logger?id=tagging)
