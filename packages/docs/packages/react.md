@@ -104,3 +104,17 @@ export const YourComponent = () => {
     );
 }
 ```
+
+
+## Derived values
+`useSwearGetter` hook creates a computed state by callback.
+```javascript
+const [count, { set }] = useSwear(countSwear);
+const doubledCount = useSwearGetter(countSwear, (state) => state * 2);
+
+console.log(count, doubledCount); // > 0 0
+
+set(10);
+
+console.log(count, doubledCount); // > 10 20
+```

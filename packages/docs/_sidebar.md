@@ -11,6 +11,7 @@
     - [Demo](/packages/react?id=demo)
     - [Installation](/packages/react?id=installation)
     - [Usage](/packages/react?id=usage)
+    - [Derived (computed) values](/packages/react?id=derived-values)
   - [**Logger**](/packages/logger)
     - [Installation](/packages/logger?id=installation)
     - [Usage](/packages/logger?id=usage)
