@@ -8,13 +8,9 @@ export const useSwearState = <T>(swearId: SwearId, defaultState: T): SwearStateR
   const swear = createSwear(swearId, defaultState, () => {});
   const [swearValue, setSwearValue] = useState<T>(store?.getSwearState(swear) ?? defaultState);
 
-  useEffect(() => {
-    store?.subscribe(swear, (newValue: React.SetStateAction<T>) => {
-      setSwearValue(newValue);
-    });
-
-    return () => store?.unsubscribe(swear);
-  }, []);
+  useEffect(() => store?.subscribe(swear, (newValue: React.SetStateAction<T>) => {
+    setSwearValue(newValue);
+  }), []);
 
   return [swearValue, store?.getSwearActions(swear)];
 };

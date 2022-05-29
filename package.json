@@ -8,7 +8,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "compile": "lerna run compile",
-    "release": "node release.js"
+    "release": "node release.js",
+    "test": "lerna run test"
   },
   "dependencies": {
     "lerna": "^4.0.0"

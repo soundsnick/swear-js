@@ -1,4 +1,4 @@
-export type SwearStoreType<T> = Record<string, T>;
+export type SwearStoreType = Map<string, any>;
 
 export type SwearId = string;
 
@@ -16,7 +16,7 @@ export type SwearCreateStoreArgs = {
 
 export type SwearSubscriberOnUpdate<T> = (newValue: T) => void;
 
-export type SwearStoreSubscribers = Record<SwearId, SwearSubscriberOnUpdate<any>>;
+export type SwearStoreSubscribers = Map<SwearId, Map<string, SwearSubscriberOnUpdate<any>>>;
 
 export type SwearMutateType<T> = ((payload: T | ((prev: T) => T), tag?: string) => void) | (() => void);
 

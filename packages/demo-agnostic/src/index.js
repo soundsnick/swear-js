@@ -4,17 +4,19 @@ import { countSwear } from "./swear/countSwear";
 
 const store = createStore({ onPatch: swearLogger() });
 
-const render = ({ count }) => {
+const render = () => {
     const counter = document.getElementById('counter');
-    counter.innerHTML = String(count);
+    const counterComputed = document.getElementById('counter-computed');
+    console.log('sdksldk')
+    counter.innerHTML = String(store.getSwearState(countSwear));
+    counterComputed.innerHTML = String(store.createSwearGetter(countSwear, (state) => state * 5));
 };
 
 // IIFE
 (() => {
-    store.subscribe(countSwear, (newValue) => {
-        render({ count: newValue });
+    store.subscribe(countSwear, () => {
+        render();
     });
-
     const { increase, decrease } = store.getSwearActions(countSwear);
 
     const decreaseButton = document.getElementById('decrease');
@@ -23,5 +25,5 @@ const render = ({ count }) => {
     decreaseButton.addEventListener('click', decrease);
     increaseButton.addEventListener('click', increase);
 
-    render({ count: store.getSwearState(countSwear) });
+    render();
 })()

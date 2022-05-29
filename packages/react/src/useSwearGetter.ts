@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { SwearType } from '@swear-js/core';
 import { swearContext } from './swearContext';
-import { SwearReturnType } from './types';
 
-export const useSwear = <T, Y>(swear: SwearType<T, Y>): SwearReturnType<T, Y> => {
+export const useSwearGetter = <T, Y, S>(swear: SwearType<T, Y>, cb: (state: T) => S): S => {
   const store = React.useContext(swearContext);
   const [, defaultState] = swear;
 
@@ -13,5 +12,5 @@ export const useSwear = <T, Y>(swear: SwearType<T, Y>): SwearReturnType<T, Y> =>
     setSwearValue(newValue);
   }), []);
 
-  return [swearValue, store?.getSwearActions(swear)];
+  return useMemo(() => cb(swearValue), [swearValue]);
 };

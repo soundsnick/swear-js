@@ -1,7 +1,7 @@
 import React, {
   FC,
 } from 'react';
-import { useSwear } from '@swear-js/react';
+import { useSwear, useSwearGetter } from '@swear-js/react';
 
 import { countSwear } from '../swears/countSwear';
 import { countProSwear } from '../swears/countProSwear';
@@ -11,7 +11,10 @@ export const MainPage: FC = () => {
   const [count, {
     set: setCount, decrease, increase, reset: clearCount,
   }] = useSwear(countSwear);
+  const doubledCount = useSwearGetter(countSwear, (state) => state * 2);
+
   const [countPro, { set: setCountPro, reset: clearCountPro }] = useSwear(countProSwear);
+
   return (
     <div style={{
       display: 'flex', justifyContent: 'space-between', marginTop: 150, marginBottom: 10, gap: 30,
@@ -24,6 +27,10 @@ export const MainPage: FC = () => {
         <span>
           {count}
         </span>
+        <p>
+          <span>Derived (computed) state:</span>
+          <span>{doubledCount}</span>
+        </p>
         <div style={{
           textAlign: 'center', display: 'flex', gap: 5, marginTop: 35,
         }}

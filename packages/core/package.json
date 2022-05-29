@@ -30,7 +30,8 @@
   "dependencies": {
     "@types/node": "^17.0.24",
     "typescript": "4.5.5",
-    "utility-types": "^3.10.0"
+    "utility-types": "^3.10.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.19.0",
@@ -42,7 +43,8 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
     "react-docgen-typescript-loader": "^3.7.2",
-    "standard-version": "^9.3.1"
+    "standard-version": "^9.3.1",
+    "@types/uuid": "^8.3.4"
   },
   "gitHead": "179a2c450b96aa4ec20ae0f4a29af1ba2724968e"
 }
