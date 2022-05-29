@@ -1,6 +1,6 @@
 {
   "name": "@swear-js/tests",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@swear-js/core": "^3.0.0",
+    "@swear-js/core": "^3.1.0",
     "@types/jest": "^27.5.1",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.2",
